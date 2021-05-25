@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+
+<title>We want Democracy</title>
+</head>
+<body>
+    <div class="container" id="app">
+        <div class="row my-5 justify-content-center">
+            <div class="col-8">
+                <div class="card">
+                    <div class="container-fluid py-3">
+                        <div class="row">
+                            <div class="col-12 p-3 d-flex justify-content-between">
+                                <h1 id="display">Hello World, {{display}}</h1>
+                                <button class="btn btn-primary" id="del" @click="del()">Del</button>
+                            </div>
+                        </div>
+                        <div class="row" id="voice-container">
+                            <div class="col-4" v-for="v in voice">
+                                <div :class="['border text-center py-3 rounded mt-3 our-voice', {'bg-light':v.press}]" @click="[v.press=true,run(v.name)]">
+                                    <h4>{{v.name}}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    let voice = ["We", "want", "our", "vote", "justice", "leader", "must", "respect", "release", "democracy", "need","win"]
+    let app = new Vue({
+        el:"#app",
+        data:{
+            display:"",
+            // voice: ["We", "want", "our", "vote", "justice", "leader", "must", "respect", "release", "democracy", "need","win"]
+            voice: [
+                {name:"we", press:false},
+                {name:"want", press:false},
+                {name:"our", press:false},
+                {name:"vote", press:false},
+                {name:"justice", press:false},
+                {name:"leader", press:false},
+                {name:"must", press:false},
+                {name:"respect", press:false},
+                {name:"release", press:false},
+                {name:"democracy", press:false},
+                {name:"need", press:false},
+                {name:"win", press:false},
+            ]
+        },
+        methods:{
+            run(x){
+                this.display+=x+" ";
+            },
+            del(){
+                this.display=""
+                let newArr = [];
+                this.voice.map(el=>{
+                    newArr.push({name:el.name,press:false})
+                })
+                this.voice=newArr
+            }
+        }
+    })
+</script>
+</body>
+</html>
